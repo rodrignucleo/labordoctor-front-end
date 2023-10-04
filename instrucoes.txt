@@ -1,0 +1,25 @@
+Objetivo: Desenvolver uma aplicação em Flutter que permita ao usuário criar listas de leitura personalizadas, adicionar avaliações e comentários sobre os livros e compartilhar suas listas com amigos.
+
+Requisitos:
+
+- Listas de Leitura:
+A aplicação deve permitir que o usuário crie listas personalizadas de leitura, onde possa adicionar livros de seu interesse.
+Cada lista pode ter um nome, descrição e uma seleção de livros.
+- Avaliações e Comentários:
+O usuário deve ser capaz de adicionar uma avaliação (por exemplo, de 1 a 5 estrelas) e um comentário para cada livro em sua lista.
+- Compartilhamento:
+Os usuários devem ter a opção de compartilhar suas listas de leitura com amigos através de um link ou código.
+- Persistência Local:
+Assim como na proposta anterior, utilize SQLite ou outro mecanismo de persistência local.
+- Interface:
+A interface deve ser intuitiva, permitindo que os usuários facilmente adicionem livros às suas listas, avaliem e comentem.
+- Tratamento de Erros:
+Garanta que os usuários sejam notificados de quaisquer problemas que possam surgir.
+
+Dicas:
+Pense em como os usuários gostariam de organizar suas listas de leitura. Talvez por gênero, autor ou até mesmo por humor (por exemplo, "Livros para ler em dias chuvosos").
+Considere a possibilidade de adicionar uma funcionalidade de "arrastar e soltar" para reorganizar os livros nas listas.
+
+Entrega:
+Assim como antes, envie o código-fonte, screenshots das telas e um relatório detalhando as decisões tomadas, a estrutura do banco de dados e quaisquer desafios que você tenha encontrado.
+Boa sorte com seu projeto e esperamos ver suas incríveis listas de leitura em ação!
