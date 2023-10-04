@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(builder: (context) {
       return MaterialApp(
-        initialRoute: '/pacientes',
+        initialRoute: '/',
         routes: {
           '/': (context) => const HomePage(),
           '/pacientes': (context) => const PacienteList(),
