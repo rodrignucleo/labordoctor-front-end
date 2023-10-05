@@ -22,6 +22,21 @@ class HttpClient implements IHttpClient{
     return await client.put(Uri.parse(url), body: body);
   }
 
+  Future<Post> post(String title, String body) async{
+    Map<String, dynamic> request = {
+      'title': title,
+      'body': body,
+      'userId': "1",
+    };
+    final response = await client.post(
+      Uri.parse(url),
+      body: request,
+    );
+
+
+    }
+  }
+
   // @override
   // Future delete(String url) {
   //   // TODO: implement delete
