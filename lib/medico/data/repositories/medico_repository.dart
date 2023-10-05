@@ -24,7 +24,7 @@ class MedicoRepository implements IMedicoRepository {
 
       final body = jsonDecode(response.body);
 
-      body['medico'].map((item) {
+      body['tb_medico'].map((item) {
         final MedicoModel medico = MedicoModel.fromMap(item);
         medicos.add(medico);
       }).toList();

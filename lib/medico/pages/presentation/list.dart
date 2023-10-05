@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/medico/data/http/http_client.dart';
-import 'package:myapp/medico/data/model/medico_model.dart';
 import 'package:myapp/medico/data/repositories/medico_repository.dart';
 import 'package:myapp/medico/pages/presentation/store/medico_store.dart';
 
@@ -79,19 +78,5 @@ class _MedicoPageState extends State<MedicoList> {
         },
       ),
     );
-    //   floatingActionButton: FloatingActionButton(
-    //     onPressed: () async {
-    //       await Navigator.push(
-    //         context,
-    //         MaterialPageRoute(builder: (context) => const MedicoForm()),
-    //       );
-    //       setState(() {});
-    //     },
-    //     backgroundColor: Colors.blue,
-    //     child: const Icon(Icons.add),
-    //   ),
-    //   floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-    //   drawer: DrawerPage.getWidget(context),
-    // );
   }
 }
