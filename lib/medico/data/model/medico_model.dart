@@ -1,7 +1,4 @@
-import 'package:equatable/equatable.dart';
-
-// ignore: must_be_immutable
-class MedicoEntity extends Equatable {
+class MedicoModel {
   late int? id_medico;
   final String nome;
   final String crm;
@@ -10,7 +7,7 @@ class MedicoEntity extends Equatable {
   final String telefone;
   final String email;
 
-  MedicoEntity({
+  MedicoModel({
     this.id_medico,
     required this.nome,
     required this.crm,
@@ -20,6 +17,15 @@ class MedicoEntity extends Equatable {
     required this.email,
   });
 
-  @override
-  List<Object?> get props => [id_medico];
+  factory MedicoModel.fromMap(Map<String, dynamic> map){
+    return MedicoModel(
+      id_medico: map['id_medico'],
+      nome: map['nome'],
+      crm: map['crm'],
+      cpf: map['cpf'],
+      especilidade: map['especilidade'],
+      telefone: map['telefone'],
+      email: map['email'],
+    );
+  }
 }

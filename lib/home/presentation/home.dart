@@ -26,12 +26,12 @@ class _homePage extends State<HomePage> {
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.darken),
               image: const NetworkImage(
-                  'https://i.pinimg.com/736x/a1/62/f4/a162f45c40af149da77113b69e8db4c3.jpg'),
+                  'https://img.freepik.com/free-photo/i-trying-be-best-doctor_329181-2188.jpg?w=740&t=st=1696469160~exp=1696469760~hmac=d01b0534e79d230d44d56266bc70a2923fb427f8d19ff907ee36168c48396e19'),
               fit: BoxFit.cover),
         ),
         child: const Padding(
           padding: EdgeInsets.only(top: 100.0, left: 20, right: 5),
-          child: Text('Bem Vindo\nao\nLista Livros',
+          child: Text('Labor Doctor',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30.0,

@@ -1,1 +1,1 @@
-const String apiUrl = 'https://trepide.serveo.net/api';
+const String apiUrl = 'https://malo.serveo.net/api';
