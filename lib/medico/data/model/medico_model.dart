@@ -28,4 +28,16 @@ class MedicoModel {
       email: map['email'],
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id_medico': id_medico,
+      'nome': nome,
+      'crm': crm,
+      'cpf': cpf,
+      'especilidade': especilidade,
+      'telefone': telefone,
+      'email': email,
+    };
+  }
 }
