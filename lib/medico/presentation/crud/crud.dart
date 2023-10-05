@@ -72,14 +72,6 @@ class MedicoFormState extends State<MedicoForm> {
                     thickness: 1.0,
                   ),
                   BotaoGravar(
-                    onPressedNovo: () {
-                      _nomeController.clear();
-                      _crmController.clear();
-                      _cpfController.clear();
-                      _especilidadeController.clear();
-                      _telefoneController.clear();
-                      _emailController.clear();
-                    },
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
@@ -93,8 +85,7 @@ class MedicoFormState extends State<MedicoForm> {
                           email: _emailController.text,
                         );
 
-                        if (widget.medicoModel == null ||
-                            widget.medicoModel!.id_medico == null) {
+                        if (widget.medicoModel == null ||  widget.medicoModel!.id_medico == null) {
                           await MedicoInsertDataSource()
                               .createMedico(medico: medico);
                         } else {
@@ -110,6 +101,14 @@ class MedicoFormState extends State<MedicoForm> {
                         content: Text('Medico adicionado'),
                         duration: Duration(seconds: 2),
                       ));
+                    },
+                     onPressedNovo: () {
+                      _nomeController.clear();
+                      _crmController.clear();
+                      _cpfController.clear();
+                      _especilidadeController.clear();
+                      _telefoneController.clear();
+                      _emailController.clear();
                     },
                   ),
                 ],

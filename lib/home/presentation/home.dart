@@ -15,7 +15,7 @@ class _homePage extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bem Vindo'),
+        title: const Text('Labor Doctor'),
         centerTitle: true,
       ),
       body: Container(
@@ -26,12 +26,12 @@ class _homePage extends State<HomePage> {
               colorFilter: ColorFilter.mode(
                   Colors.black.withOpacity(0.5), BlendMode.darken),
               image: const NetworkImage(
-                  'https://i.pinimg.com/736x/a1/62/f4/a162f45c40af149da77113b69e8db4c3.jpg'),
+                  'https://s2-techtudo.glbimg.com/3JBdxyWrTEODOvrw0do8Qlmm9sA=/0x0:1200x700/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2023/B/d/bFXBYbRjumyOVCUwCpaw/the-good-doctor.jpg'),
               fit: BoxFit.cover),
         ),
         child: const Padding(
           padding: EdgeInsets.only(top: 100.0, left: 20, right: 5),
-          child: Text('Bem Vindo\nao\nLista Livros',
+          child: Text('Bem Vindo',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 30.0,
