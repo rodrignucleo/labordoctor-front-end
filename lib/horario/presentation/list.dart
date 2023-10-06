@@ -65,7 +65,7 @@ class _HorarioPageState extends State<HorarioList> {
                     return Dismissible(
                       onDismissed: (direction) {
                         HorarioDeleteDataSource()
-                            .deleteHorario(id: horario.horarioId as int);
+                            .deleteHorario(id: horario.horarioId);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             showCloseIcon: true,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:myapp/consulta/presentation/list.dart';
 import 'package:myapp/horario/presentation/list.dart';
-import 'package:myapp/medico/presentation/list.dart';
+import 'package:myapp/medico/presentation/list_page.dart';
 import 'paciente/presentation/list.dart';
 import 'home/presentation/home.dart';
 

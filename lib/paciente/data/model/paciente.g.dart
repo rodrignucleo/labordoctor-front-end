@@ -8,7 +8,7 @@ part of 'paciente.dart';
 
 PacienteModel _$PacienteModelFromJson(Map<String, dynamic> json) =>
     PacienteModel(
-      pacienteId: json['pacienteId'] as int?,
+      pacienteId: json['pacienteId'] as int,
       nome: json['nome'] as String,
       cpf: json['cpf'] as String,
       telefone: json['telefone'] as String,

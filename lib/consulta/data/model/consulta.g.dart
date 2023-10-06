@@ -22,11 +22,11 @@ ConsultaModel _$ConsultaModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$ConsultaModelToJson(ConsultaModel instance) =>
     <String, dynamic>{
       'consultaId': instance.consultaId,
-      'pacienteId': instance.pacienteId,
       'medicoId': instance.medicoId,
-      'horarioId': instance.horarioId,
-      'paciente': instance.paciente,
       'medico': instance.medico,
+      'pacienteId': instance.pacienteId,
+      'paciente': instance.paciente,
+      'horarioId': instance.horarioId,
       'horario': instance.horario,
       'status': instance.status,
     };

@@ -15,8 +15,6 @@ class PacienteListDataSource {
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = jsonDecode(response.body);
       
-      print(jsonResponse);
-      
       return jsonResponse.map((json) => PacienteModel.fromJson(json)).toList();
     } else {
       return [];

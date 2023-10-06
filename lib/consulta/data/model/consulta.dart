@@ -4,21 +4,29 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../../horario/data/model/horario.dart';
 import '../../../medico/data/model/medico.dart';
 import '../../../paciente/data/model/paciente.dart';
-import '../../domain/consulta.dart';
 
 part 'consulta.g.dart';
 
 @JsonSerializable()
-class ConsultaModel extends ConsultaEntity {
+class ConsultaModel {
+  late int? consultaId;
+  final int medicoId;
+  final MedicoModel medico;
+  final int pacienteId;
+  final PacienteModel paciente;
+  final int horarioId;
+  final HorarioModel horario;
+  final bool status;
+
   ConsultaModel({
-    super.consultaId,
-    required super.medicoId,
-    required super.medico,
-    required super.pacienteId,
-    required super.paciente,
-    required super.horarioId,
-    required super.horario,
-    required super.status,
+    required this.consultaId,
+    required this.medicoId,
+    required this.medico,
+    required this.pacienteId,
+    required this.paciente,
+    required this.horarioId,
+    required this.horario,
+    required this.status,
   });
 
   factory ConsultaModel.fromJson(Map<String, dynamic> json) =>

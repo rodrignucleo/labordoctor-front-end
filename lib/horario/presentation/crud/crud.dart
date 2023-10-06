@@ -27,6 +27,7 @@ class HorarioFormState extends State<HorarioForm> {
   final TextEditingController _dataController = TextEditingController();
 
   List<MedicoModel> _medicosCadastrados = [];
+  // ignore: prefer_final_fields
   List<MedicoModel> _medicoSelecionado = [];
 
   @override
@@ -117,7 +118,6 @@ class HorarioFormState extends State<HorarioForm> {
                                         } else {
                                           _medicoSelecionado.add(medico);
                                           _medico = medico;
-                                          print('medico: $medico');
                                         }
                                       });
                                     },
@@ -148,14 +148,15 @@ class HorarioFormState extends State<HorarioForm> {
                         final HorarioModel horario = HorarioModel(
                           // data: DateTime.parse(_dataController.text),
                           // estamos com problema aqui
+                          horarioId: 0,
                           data: DateTime.now(),
                           medico: _medico,
-                          medicoId: _medico.id_medico as int,
-                          status: true,
+                          medicoId: _medico.id_medico,
+                          status: true, 
                         );
 
                         if (widget.horarioModel == null ||
-                            widget.horarioModel!.horarioId == null) {
+                            widget.horarioModel!.horarioId == 0) {
                           await HorarioInsertDataSource()
                               .createHorario(horario: horario);
                         } else {

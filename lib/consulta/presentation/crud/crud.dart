@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/horario/data/datasource/api/get.dart';
-import 'package:myapp/horario/data/model/horario.dart';
-import 'package:myapp/medico/data/datasource/api/get.dart';
-import 'package:myapp/medico/data/model/medico.dart';
-import 'package:myapp/paciente/data/datasource/api/get.dart';
-import 'package:myapp/paciente/data/model/paciente.dart';
-
+import '../../../horario/data/datasource/api/get.dart';
+import '../../../horario/data/model/horario.dart';
+import '../../../medico/data/datasource/api/get.dart';
+import '../../../medico/data/model/medico.dart';
+import '../../../paciente/data/datasource/api/get.dart';
+import '../../../paciente/data/model/paciente.dart';
 import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
 import '../../data/model/consulta.dart';
@@ -291,12 +290,13 @@ class ConsultaFormState extends State<ConsultaForm> {
 
                         if (_formKey.currentState!.validate()) {
                           final ConsultaModel consulta = ConsultaModel(
+                            consultaId: 0,
                             medico: _medico,
-                            medicoId: _medico.id_medico as int,
+                            medicoId: _medico.id_medico,
                             paciente: _paciente,
-                            pacienteId: _paciente.pacienteId as int,
+                            pacienteId: _paciente.pacienteId,
                             horario: _horario,
-                            horarioId: _horario.horarioId as int,
+                            horarioId: _horario.horarioId,
                             status: true,
                           );
 

@@ -81,6 +81,7 @@ class PacienteFormState extends State<PacienteForm> {
 
                       if (_formKey.currentState!.validate()) {
                         final PacienteModel paciente = PacienteModel(
+                          pacienteId: 0,
                           nome: _nomeController.text,
                           cpf: _cpfController.text,
                           telefone: _telefoneController.text,
@@ -89,7 +90,7 @@ class PacienteFormState extends State<PacienteForm> {
                         );
 
                         if (widget.pacienteModel == null ||
-                            widget.pacienteModel!.pacienteId == null) {
+                            widget.pacienteModel!.pacienteId == 0) {
                           await PacienteInsertDataSource()
                               .createPaciente(paciente: paciente);
                         } else {

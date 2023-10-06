@@ -47,8 +47,6 @@ class _MedicoPageState extends State<MedicoList> {
               case ConnectionState.done:
                 final List<MedicoModel> medicos = snapshot.data ?? [];
 
-                print('lista retornada:  $snapshot.data');
-
                 if (medicos.isEmpty) {
                   return const Center(
                     child: Text('Ainda não foi registrado nenhum medico.',
@@ -67,7 +65,7 @@ class _MedicoPageState extends State<MedicoList> {
                     return Dismissible(
                       onDismissed: (direction) {
                         MedicoDeleteDataSource()
-                            .deleteMedico(id: medico.id_medico as int);
+                            .deleteMedico(id: medico.id_medico);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             showCloseIcon: true,

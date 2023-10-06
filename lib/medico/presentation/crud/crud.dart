@@ -77,15 +77,16 @@ class MedicoFormState extends State<MedicoForm> {
 
                       if (_formKey.currentState!.validate()) {
                         final MedicoModel medico = MedicoModel(
+                          id_medico: 0,
                           nome: _nomeController.text,
                           crm: _crmController.text,
                           cpf: _cpfController.text,
                           especilidade: _especilidadeController.text,
                           telefone: _telefoneController.text,
-                          email: _emailController.text,
+                          email: _emailController.text, 
                         );
 
-                        if (widget.medicoModel == null ||  widget.medicoModel!.id_medico == null) {
+                        if (widget.medicoModel == null ||  widget.medicoModel!.id_medico == 0) {
                           await MedicoInsertDataSource()
                               .createMedico(medico: medico);
                         } else {

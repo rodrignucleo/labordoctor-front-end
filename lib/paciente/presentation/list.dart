@@ -66,7 +66,7 @@ class _PacientePageState extends State<PacienteList> {
                     return Dismissible(
                       onDismissed: (direction) {
                         PacienteDeleteDataSource()
-                            .deletePaciente(id: paciente.pacienteId as int);
+                            .deletePaciente(id: paciente.pacienteId);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             showCloseIcon: true,

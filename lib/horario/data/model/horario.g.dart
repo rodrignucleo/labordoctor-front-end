@@ -7,7 +7,7 @@ part of 'horario.dart';
 // **************************************************************************
 
 HorarioModel _$HorarioModelFromJson(Map<String, dynamic> json) => HorarioModel(
-      horarioId: json['horarioId'] as int?,
+      horarioId: json['horarioId'] as int,
       medicoId: json['medicoId'] as int,
       medico: MedicoModel.fromJson(json['medico'] as Map<String, dynamic>),
       data: DateTime.parse(json['data'] as String),

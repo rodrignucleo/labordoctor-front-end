@@ -2,18 +2,23 @@
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../../medico/data/model/medico.dart';
-import '../../domain/horario.dart';
 
 part 'horario.g.dart';
 
 @JsonSerializable()
-class HorarioModel extends HorarioEntity {
+class HorarioModel {
+  late int horarioId;
+  final int medicoId;
+  final MedicoModel medico;
+  final DateTime data;
+  final bool status;
+
   HorarioModel({
-    super.horarioId,
-    required super.medicoId,
-    required super.medico,
-    required super.data,
-    required super.status,
+    required this.horarioId,
+    required this.medicoId,
+    required this.medico,
+    required this.data,
+    required this.status,
   });
 
   factory HorarioModel.fromJson(Map<String, dynamic> json) =>
