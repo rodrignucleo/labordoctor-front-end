@@ -6,8 +6,7 @@ part 'paciente.g.dart';
 
 @JsonSerializable()
 class PacienteModel {
-  
-  late int pacienteId;
+  late int id_paciente;
   final String nome;
   final String cpf;
   final String telefone;
@@ -16,7 +15,7 @@ class PacienteModel {
   final String? senhaAntiga;
 
   PacienteModel({
-    required this.pacienteId,
+    required this.id_paciente,
     required this.nome,
     required this.cpf,
     required this.telefone,

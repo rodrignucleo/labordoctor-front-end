@@ -148,20 +148,20 @@ class HorarioFormState extends State<HorarioForm> {
                         final HorarioModel horario = HorarioModel(
                           // data: DateTime.parse(_dataController.text),
                           // estamos com problema aqui
-                          horarioId: 0,
+                          id_horario: 0,
                           data: DateTime.now(),
                           medico: _medico,
-                          medicoId: _medico.id_medico,
-                          status: true, 
+                          id_medico: _medico.id_medico,
+                          status: true,
                         );
 
                         if (widget.horarioModel == null ||
-                            widget.horarioModel!.horarioId == 0) {
+                            widget.horarioModel!.id_horario == 0) {
                           await HorarioInsertDataSource()
                               .createHorario(horario: horario);
                         } else {
                           // mas se ele ja existir, tem que fazer o update dos dados
-                          horario.horarioId = widget.horarioModel!.horarioId;
+                          horario.id_horario = widget.horarioModel!.id_horario;
                           await HorarioUpdateDataSource()
                               .updateHorario(horario: horario);
                         }

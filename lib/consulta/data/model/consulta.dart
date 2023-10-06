@@ -9,22 +9,22 @@ part 'consulta.g.dart';
 
 @JsonSerializable()
 class ConsultaModel {
-  late int? consultaId;
-  final int medicoId;
+  late int id_consulta;
+  final int id_medico;
   final MedicoModel medico;
-  final int pacienteId;
+  final int id_paciente;
   final PacienteModel paciente;
-  final int horarioId;
+  final int id_horario;
   final HorarioModel horario;
   final bool status;
 
   ConsultaModel({
-    required this.consultaId,
-    required this.medicoId,
+    required this.id_consulta,
+    required this.id_medico,
     required this.medico,
-    required this.pacienteId,
+    required this.id_paciente,
     required this.paciente,
-    required this.horarioId,
+    required this.id_horario,
     required this.horario,
     required this.status,
   });

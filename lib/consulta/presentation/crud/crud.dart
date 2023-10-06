@@ -290,24 +290,24 @@ class ConsultaFormState extends State<ConsultaForm> {
 
                         if (_formKey.currentState!.validate()) {
                           final ConsultaModel consulta = ConsultaModel(
-                            consultaId: 0,
+                            id_consulta: 0,
                             medico: _medico,
-                            medicoId: _medico.id_medico,
+                            id_medico: _medico.id_medico,
                             paciente: _paciente,
-                            pacienteId: _paciente.pacienteId,
+                            id_paciente: _paciente.id_paciente,
                             horario: _horario,
-                            horarioId: _horario.horarioId,
+                            id_horario: _horario.id_horario,
                             status: true,
                           );
 
                           if (widget.consultaModel == null ||
-                              widget.consultaModel!.consultaId == null) {
+                              widget.consultaModel!.id_consulta == 0) {
                             await ConsultaInsertDataSource()
                                 .createConsulta(consulta: consulta);
                           } else {
                             // mas se ele ja existir, tem que fazer o update dos dados
-                            consulta.consultaId =
-                                widget.consultaModel!.consultaId;
+                            consulta.id_consulta =
+                                widget.consultaModel!.id_consulta;
                             await ConsultaUpdateDataSource()
                                 .updateConsulta(consulta: consulta);
                           }

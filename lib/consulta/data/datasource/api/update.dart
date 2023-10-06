@@ -8,7 +8,7 @@ class ConsultaUpdateDataSource {
 
   Future<ConsultaModel> updateConsulta(
       {required ConsultaModel consulta}) async {
-    final url = '$baseUrl/${consulta.consultaId}';
+    final url = '$baseUrl/${consulta.id_consulta}';
     final response = await http.put(
       Uri.parse(url),
       headers: {'accept': '*/*', 'Content-Type': 'application/json'},

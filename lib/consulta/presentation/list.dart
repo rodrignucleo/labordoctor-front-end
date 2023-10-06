@@ -66,7 +66,7 @@ class _ConsultaPageState extends State<ConsultaList> {
                       return Dismissible(
                         onDismissed: (direction) {
                           ConsultaDeleteDataSource()
-                              .deleteConsulta(id: consulta.consultaId as int);
+                              .deleteConsulta(id: consulta.id_consulta as int);
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               showCloseIcon: true,
@@ -86,7 +86,7 @@ class _ConsultaPageState extends State<ConsultaList> {
                                 return AlertDialog(
                                   title: const Text('Confirma remover?'),
                                   content:
-                                      Text('Remover ${consulta.consultaId}?'),
+                                      Text('Remover ${consulta.id_consulta}?'),
                                   actions: [
                                     TextButton(
                                       onPressed: () {
