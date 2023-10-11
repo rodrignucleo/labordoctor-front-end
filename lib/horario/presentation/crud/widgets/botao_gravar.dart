@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class BotaoGravar extends StatelessWidget {
   final Function() onPressed;
-  final VoidCallback onPressedNovo;
+  final VoidCallback limpaCamposDeDados;
 
   const BotaoGravar({
     super.key,
     required this.onPressed,
-    required this.onPressedNovo,
+    required this.limpaCamposDeDados,
   });
 
   @override
@@ -15,7 +15,7 @@ class BotaoGravar extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         onPressed();
-        onPressedNovo();
+        limpaCamposDeDados();
         Navigator.of(context).pop();
       },
       child: const Text('Salvar'),

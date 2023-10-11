@@ -5,32 +5,32 @@ import '../../../../shared/widgets/background_remover_item.dart';
 import '../../../../shared/widgets/snackbar_item_deletado.dart';
 import '../../../../shared/widgets/mylisttile.dart';
 import '../../../data/datasource/api/delete.dart';
-import '../../../data/model/medico.dart';
+import '../../../data/model/horario.dart';
 import '../crud.dart';
 
-class MedicalListView extends StatefulWidget {
-  final List<MedicoModel> medicos;
+class HorarioListView extends StatefulWidget {
+  final List<HorarioModel> horarios;
 
-  const MedicalListView({
+  const HorarioListView({
     super.key,
-    required this.medicos,
+    required this.horarios,
   });
 
   @override
-  State<MedicalListView> createState() => _MedicalListViewState();
+  State<HorarioListView> createState() => _HorarioListView();
 }
 
-class _MedicalListViewState extends State<MedicalListView> {
+class _HorarioListView extends State<HorarioListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.medicos.length,
+      itemCount: widget.horarios.length,
       itemBuilder: (BuildContext context, int index) {
-        final MedicoModel medico = widget.medicos[index];
+        final HorarioModel horario = widget.horarios[index];
 
         return Dismissible(
           onDismissed: (direction) {
-            MedicoDeleteDataSource().deleteMedico(id: medico.id_medico);
+            HorarioDeleteDataSource().deleteHorario(id: horario.id_horario);
             SnackbarMensagemItemDeletado.show(context: context);
           },
           confirmDismiss: (direction) async {
@@ -38,7 +38,7 @@ class _MedicalListViewState extends State<MedicalListView> {
                 context: context,
                 builder: (context) {
                   return ConfirmaDeletarItem(
-                    nomeItem: medico.nome,
+                    nomeItem: horario.data as String,
                   );
                 });
           },
@@ -47,17 +47,17 @@ class _MedicalListViewState extends State<MedicalListView> {
           key: Key('$index'),
           child: MyListTile(
             isOdd: index.isOdd,
-            title: medico.nome,
-            line01Text: medico.crm,
-            line02Text: medico.especilidade,
+            title: horario.data as String,
+            line01Text: horario.medico.nome,
+            line02Text: horario.medico.especilidade,
             imagePath: 'assets/images/livro.jpg',
             visivelSeLista: false,
             onEditPressed: () async {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MedicoForm(
-                    medicoModel: medico,
+                  builder: (context) => HorarioForm(
+                    horarioModel: horario,
                   ),
                 ),
               );

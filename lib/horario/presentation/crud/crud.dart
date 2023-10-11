@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/medico/data/datasource/api/get.dart';
 import 'package:myapp/medico/data/model/medico.dart';
+import 'package:myapp/shared/widgets/error_carregamento_dados.dart';
 
 import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
@@ -52,6 +53,15 @@ class HorarioFormState extends State<HorarioForm> {
     });
   }
 
+  // nesta funcao estamos tentando simplificar a apresentação
+  // das opções de horario, paciente e médico, passando o valor
+  // selecionado por callback para a funcao principal
+  void _recebeMedicoSelecionado(dynamic item) {
+    setState(() {
+      _medico = item;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,17 +80,7 @@ class HorarioFormState extends State<HorarioForm> {
                   SizedBox(
                     height: 200,
                     child: _medicosCadastrados.isEmpty
-                        ? const Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Nenhum médico ainda adicionado',
-                                ),
-                              ],
-                            ),
-                          )
+                        ? const ErrorLoadData(mensagem: 'Nenhum médico cadastrado')
                         : ListView.builder(
                             shrinkWrap: true,
                             itemCount: _medicosCadastrados.length,
@@ -138,9 +138,6 @@ class HorarioFormState extends State<HorarioForm> {
                     thickness: 1.0,
                   ),
                   BotaoGravar(
-                    onPressedNovo: () {
-                      _dataController.clear();
-                    },
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
@@ -172,6 +169,9 @@ class HorarioFormState extends State<HorarioForm> {
                         content: Text('Horario adicionado'),
                         duration: Duration(seconds: 2),
                       ));
+                    },
+                    limpaCamposDeDados: () {
+                      _dataController.clear();
                     },
                   ),
                 ],

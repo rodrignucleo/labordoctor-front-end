@@ -5,32 +5,32 @@ import '../../../../shared/widgets/background_remover_item.dart';
 import '../../../../shared/widgets/snackbar_item_deletado.dart';
 import '../../../../shared/widgets/mylisttile.dart';
 import '../../../data/datasource/api/delete.dart';
-import '../../../data/model/medico.dart';
+import '../../../data/model/consulta.dart';
 import '../crud.dart';
 
-class MedicalListView extends StatefulWidget {
-  final List<MedicoModel> medicos;
+class ConsultaListView extends StatefulWidget {
+  final List<ConsultaModel> consultas;
 
-  const MedicalListView({
+  const ConsultaListView({
     super.key,
-    required this.medicos,
+    required this.consultas,
   });
 
   @override
-  State<MedicalListView> createState() => _MedicalListViewState();
+  State<ConsultaListView> createState() => _ConsultaListView();
 }
 
-class _MedicalListViewState extends State<MedicalListView> {
+class _ConsultaListView extends State<ConsultaListView> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: widget.medicos.length,
+      itemCount: widget.consultas.length,
       itemBuilder: (BuildContext context, int index) {
-        final MedicoModel medico = widget.medicos[index];
+        final ConsultaModel consulta = widget.consultas[index];
 
         return Dismissible(
           onDismissed: (direction) {
-            MedicoDeleteDataSource().deleteMedico(id: medico.id_medico);
+            ConsultaDeleteDataSource().deleteConsulta(id: consulta.id_consulta);
             SnackbarMensagemItemDeletado.show(context: context);
           },
           confirmDismiss: (direction) async {
@@ -38,7 +38,7 @@ class _MedicalListViewState extends State<MedicalListView> {
                 context: context,
                 builder: (context) {
                   return ConfirmaDeletarItem(
-                    nomeItem: medico.nome,
+                    nomeItem: consulta.horario.data as String,
                   );
                 });
           },
@@ -47,17 +47,17 @@ class _MedicalListViewState extends State<MedicalListView> {
           key: Key('$index'),
           child: MyListTile(
             isOdd: index.isOdd,
-            title: medico.nome,
-            line01Text: medico.crm,
-            line02Text: medico.especilidade,
+            title: consulta.horario.data as String,
+            line01Text: consulta.medico.nome,
+            line02Text: consulta.paciente.nome,
             imagePath: 'assets/images/livro.jpg',
             visivelSeLista: false,
             onEditPressed: () async {
               await Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MedicoForm(
-                    medicoModel: medico,
+                  builder: (context) => ConsultaForm(
+                    consultaModel: consulta,
                   ),
                 ),
               );

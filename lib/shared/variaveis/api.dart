@@ -8,4 +8,4 @@ Terminal 3: ssh -R 80:localhost:5164 serveo.net
 Copia o link e cola abaixo
 */
 
-const String apiUrl = 'https://atra.serveo.net/api';
+const String apiUrl = 'https://praeter.serveo.net/api';

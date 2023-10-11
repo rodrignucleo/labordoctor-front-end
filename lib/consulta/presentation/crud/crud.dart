@@ -9,6 +9,7 @@ import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
 import '../../data/model/consulta.dart';
 import 'widgets/botao_gravar.dart';
+import 'widgets/select_list_itens.dart';
 
 class ConsultaForm extends StatefulWidget {
   final ConsultaModel? consultaModel;
@@ -47,6 +48,15 @@ class ConsultaFormState extends State<ConsultaForm> {
     _resgataHorarioDisponivel();
 
     super.initState();
+  }
+
+  // nesta funcao estamos tentando simplificar a apresentação
+  // das opções de horario, paciente e médico, passando o valor
+  // selecionado por callback para a funcao principal
+  void _recebeMedicoSelecionado(dynamic item) {
+    setState(() {
+      _medico = item;
+    });
   }
 
   Future<void> _resgataMedicoDisponivel() async {
@@ -282,9 +292,6 @@ class ConsultaFormState extends State<ConsultaForm> {
                       thickness: 1.0,
                     ),
                     BotaoGravar(
-                      onPressedNovo: () {
-                        _dataController.clear();
-                      },
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
 
@@ -319,6 +326,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                           content: Text('Consulta adicionado'),
                           duration: Duration(seconds: 2),
                         ));
+                      },
+                      limpaCamposDeDados: () {
+                        _dataController.clear();
                       },
                     ),
                   ],

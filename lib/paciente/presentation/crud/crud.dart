@@ -69,13 +69,7 @@ class PacienteFormState extends State<PacienteForm> {
                     thickness: 1.0,
                   ),
                   BotaoGravar(
-                    onPressedNovo: () {
-                      _nomeController.clear();
-                      _cpfController.clear();
-                      _telefoneController.clear();
-                      _emailController.clear();
-                      _senhaController.clear();
-                    },
+                    
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
@@ -107,6 +101,13 @@ class PacienteFormState extends State<PacienteForm> {
                         content: Text('Paciente adicionado'),
                         duration: Duration(seconds: 2),
                       ));
+                    },
+                    limpaCamposDeDados: () {
+                      _nomeController.clear();
+                      _cpfController.clear();
+                      _telefoneController.clear();
+                      _emailController.clear();
+                      _senhaController.clear();
                     },
                   ),
                 ],
