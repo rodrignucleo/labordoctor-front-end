@@ -14,8 +14,6 @@ class MedicoListDataSource {
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = jsonDecode(response.body);
 
-      print(jsonResponse);
-
       return jsonResponse.map((json) => MedicoModel.fromJson(json)).toList();
     } else {
       return [];

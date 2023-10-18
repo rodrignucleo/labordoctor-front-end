@@ -56,64 +56,69 @@ class MedicoFormState extends State<MedicoForm> {
         child: Form(
           autovalidateMode: AutovalidateMode.onUserInteraction,
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  NomeMedicoField(controller: _nomeController),
-                  CrmMedicoField(controller: _crmController),
-                  CpfMedicoField(controller: _cpfController),
-                  EspecialidadeMedicoField(controller: _especilidadeController),
-                  TelefoneMedicoField(controller: _telefoneController),
-                  EmailMedicoField(controller: _emailController),
-                  const Divider(
-                    color: Color.fromARGB(255, 0, 0, 0),
-                    thickness: 1.0,
-                  ),
-                  BotaoGravar(
-                    onPressed: () async {
-                      FocusScope.of(context).unfocus();
-
-                      if (_formKey.currentState!.validate()) {
-                        final MedicoModel medico = MedicoModel(
-                          nome: _nomeController.text,
-                          crm: _crmController.text,
-                          cpf: _cpfController.text,
-                          especilidade: _especilidadeController.text,
-                          telefone: _telefoneController.text,
-                          email: _emailController.text,
-                        );
-
-                        if (widget.medicoModel == null ||  widget.medicoModel!.id_medico == null) {
-                          await MedicoInsertDataSource()
-                              .createMedico(medico: medico);
-                        } else {
-                          // mas se ele ja existir, tem que fazer o update dos dados
-                          medico.id_medico = widget.medicoModel!.id_medico;
-                          await MedicoUpdateDataSource()
-                              .updateMedico(medico: medico);
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    NomeMedicoField(controller: _nomeController),
+                    CrmMedicoField(controller: _crmController),
+                    CpfMedicoField(controller: _cpfController),
+                    EspecialidadeMedicoField(controller: _especilidadeController),
+                    TelefoneMedicoField(controller: _telefoneController),
+                    EmailMedicoField(controller: _emailController),
+                    
+                    const Divider(
+                      color: Color.fromARGB(255, 0, 0, 0),
+                      thickness: 1.0,
+                    ),
+          
+                    BotaoGravar(
+                      onPressed: () async {
+                        FocusScope.of(context).unfocus();
+          
+                        if (_formKey.currentState!.validate()) {
+                          final MedicoModel medico = MedicoModel(
+                            id_medico: 0,
+                            nome: _nomeController.text,
+                            crm: _crmController.text,
+                            cpf: _cpfController.text,
+                            especilidade: _especilidadeController.text,
+                            telefone: _telefoneController.text,
+                            email: _emailController.text, 
+                          );
+          
+                          if (widget.medicoModel == null ||  widget.medicoModel!.id_medico == 0) {
+                            await MedicoInsertDataSource()
+                                .createMedico(medico: medico);
+                          } else {
+                            // mas se ele ja existir, tem que fazer o update dos dados
+                            medico.id_medico = widget.medicoModel!.id_medico;
+                            await MedicoUpdateDataSource()
+                                .updateMedico(medico: medico);
+                          }
                         }
-                      }
-
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Medico adicionado'),
-                        duration: Duration(seconds: 2),
-                      ));
-                    },
-                     onPressedNovo: () {
-                      _nomeController.clear();
-                      _crmController.clear();
-                      _cpfController.clear();
-                      _especilidadeController.clear();
-                      _telefoneController.clear();
-                      _emailController.clear();
-                    },
-                  ),
-                ],
-              ),
-            ],
+          
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: Text('Medico adicionado'),
+                          duration: Duration(seconds: 2),
+                        ));
+                      },
+                      limpaCamposDeDados : () {
+                        _nomeController.clear();
+                        _crmController.clear();
+                        _cpfController.clear();
+                        _especilidadeController.clear();
+                        _telefoneController.clear();
+                        _emailController.clear();
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

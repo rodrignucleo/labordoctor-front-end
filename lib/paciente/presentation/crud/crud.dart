@@ -14,7 +14,7 @@ class PacienteForm extends StatefulWidget {
   final PacienteModel? pacienteModel;
 
   const PacienteForm({
-    Key? key,
+    Key? key, 
     this.pacienteModel,
   }) : super(key: key);
 
@@ -69,18 +69,13 @@ class PacienteFormState extends State<PacienteForm> {
                     thickness: 1.0,
                   ),
                   BotaoGravar(
-                    onPressedNovo: () {
-                      _nomeController.clear();
-                      _cpfController.clear();
-                      _telefoneController.clear();
-                      _emailController.clear();
-                      _senhaController.clear();
-                    },
+                    
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
                       if (_formKey.currentState!.validate()) {
                         final PacienteModel paciente = PacienteModel(
+                          id_paciente: 0,
                           nome: _nomeController.text,
                           cpf: _cpfController.text,
                           telefone: _telefoneController.text,
@@ -89,13 +84,13 @@ class PacienteFormState extends State<PacienteForm> {
                         );
 
                         if (widget.pacienteModel == null ||
-                            widget.pacienteModel!.pacienteId == null) {
+                            widget.pacienteModel!.id_paciente == 0) {
                           await PacienteInsertDataSource()
                               .createPaciente(paciente: paciente);
                         } else {
                           // mas se ele ja existir, tem que fazer o update dos dados
-                          paciente.pacienteId =
-                              widget.pacienteModel!.pacienteId;
+                          paciente.id_paciente =
+                              widget.pacienteModel!.id_paciente;
                           await PacienteUpdateDataSource()
                               .updatePaciente(paciente: paciente);
                         }
@@ -106,6 +101,13 @@ class PacienteFormState extends State<PacienteForm> {
                         content: Text('Paciente adicionado'),
                         duration: Duration(seconds: 2),
                       ));
+                    },
+                    limpaCamposDeDados: () {
+                      _nomeController.clear();
+                      _cpfController.clear();
+                      _telefoneController.clear();
+                      _emailController.clear();
+                      _senhaController.clear();
                     },
                   ),
                 ],

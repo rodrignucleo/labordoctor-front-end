@@ -7,7 +7,7 @@ class HorarioUpdateDataSource {
   final String baseUrl = '$apiUrl/schedule';
 
   Future<HorarioModel> updateHorario({required HorarioModel horario}) async {
-    final url = '$baseUrl/${horario.horarioId}';
+    final url = '$baseUrl/${horario.id_horario}';
     final response = await http.put(
       Uri.parse(url),
       headers: {'accept': '*/*', 'Content-Type': 'application/json'},

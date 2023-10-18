@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
-import '../../shared/widgets/background_body_decoration.dart';
 import '../../shared/widgets/drawpages.dart';
-import '../../shared/widgets/error_carregamento_dados.dart';
 import '../data/datasource/api/get.dart';
-import '../data/model/consulta.dart';
-import 'crud/crud.dart';
+import '../data/model/medico.dart';
+import '../../../../shared/widgets//background_body_decoration.dart';
+import '../../../../shared/widgets/error_carregamento_dados.dart';
 import 'crud/widgets/listview.dart';
+import 'crud/crud.dart';
 
-class ConsultaList extends StatefulWidget {
-  const ConsultaList({super.key});
+class MedicoList extends StatefulWidget {
+  const MedicoList({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _ConsultaPageState createState() => _ConsultaPageState();
+  _MedicoPageState createState() => _MedicoPageState();
 }
 
-class _ConsultaPageState extends State<ConsultaList> {
+class _MedicoPageState extends State<MedicoList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Consultas'),
+        title: const Text('Medicos'),
         centerTitle: true,
       ),
       body: Container(
@@ -29,8 +29,8 @@ class _ConsultaPageState extends State<ConsultaList> {
         width: double.infinity,
         decoration: BoxDecorationBackground(),
         padding: const EdgeInsets.only(top: 2),
-        child: FutureBuilder<List<ConsultaModel>>(
-          future: ConsultaListDataSource().getConsultas(),
+        child: FutureBuilder<List<MedicoModel>>(
+          future: MedicoListDataSource().getMedicos(),
           initialData: const [],
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
@@ -40,15 +40,15 @@ class _ConsultaPageState extends State<ConsultaList> {
             }
 
             if (snapshot.connectionState == ConnectionState.done) {
-              final List<ConsultaModel> consultas = snapshot.data ?? [];
+              final List<MedicoModel> medicos = snapshot.data ?? [];
 
-              if (consultas.isEmpty) {
+              if (medicos.isEmpty) {
                 return const ErrorLoadData(
-                    mensagem: 'Ainda não foi registrado nenhum consulta.');
+                    mensagem: 'Ainda não foi registrado nenhum medico.');
               }
 
-              // retorna a lista de consultas cadastradas
-              return ConsultaListView(consultas: consultas);
+              // retorna a lista de médicos cadastrados
+              return MedicalListView(medicos: medicos);
             }
             // caso nao tenha ocorrido nenhuma opção acima
             // informa o usuário que ocorreu um erro de conexão
@@ -60,7 +60,7 @@ class _ConsultaPageState extends State<ConsultaList> {
         onPressed: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const ConsultaForm()),
+            MaterialPageRoute(builder: (context) => const MedicoForm()),
           );
           setState(() {});
         },

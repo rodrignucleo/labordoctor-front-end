@@ -8,7 +8,7 @@ part of 'paciente.dart';
 
 PacienteModel _$PacienteModelFromJson(Map<String, dynamic> json) =>
     PacienteModel(
-      pacienteId: json['pacienteId'] as int?,
+      id_paciente: json['id_paciente'] as int,
       nome: json['nome'] as String,
       cpf: json['cpf'] as String,
       telefone: json['telefone'] as String,
@@ -19,7 +19,7 @@ PacienteModel _$PacienteModelFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$PacienteModelToJson(PacienteModel instance) =>
     <String, dynamic>{
-      'pacienteId': instance.pacienteId,
+      'id_paciente': instance.id_paciente,
       'nome': instance.nome,
       'cpf': instance.cpf,
       'telefone': instance.telefone,

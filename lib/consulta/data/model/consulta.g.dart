@@ -8,25 +8,25 @@ part of 'consulta.dart';
 
 ConsultaModel _$ConsultaModelFromJson(Map<String, dynamic> json) =>
     ConsultaModel(
-      consultaId: json['consultaId'] as int?,
-      medicoId: json['medicoId'] as int,
+      id_consulta: json['id_consulta'] as int,
+      id_medico: json['id_medico'] as int,
       medico: MedicoModel.fromJson(json['medico'] as Map<String, dynamic>),
-      pacienteId: json['pacienteId'] as int,
+      id_paciente: json['id_paciente'] as int,
       paciente:
           PacienteModel.fromJson(json['paciente'] as Map<String, dynamic>),
-      horarioId: json['horarioId'] as int,
+      id_horario: json['id_horario'] as int,
       horario: HorarioModel.fromJson(json['horario'] as Map<String, dynamic>),
       status: json['status'] as bool,
     );
 
 Map<String, dynamic> _$ConsultaModelToJson(ConsultaModel instance) =>
     <String, dynamic>{
-      'consultaId': instance.consultaId,
-      'pacienteId': instance.pacienteId,
-      'medicoId': instance.medicoId,
-      'horarioId': instance.horarioId,
-      'paciente': instance.paciente,
+      'id_consulta': instance.id_consulta,
+      'id_medico': instance.id_medico,
       'medico': instance.medico,
+      'id_paciente': instance.id_paciente,
+      'paciente': instance.paciente,
+      'id_horario': instance.id_horario,
       'horario': instance.horario,
       'status': instance.status,
     };

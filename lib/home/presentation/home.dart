@@ -7,10 +7,10 @@ class HomePage extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _homePage createState() => _homePage();
+  _HomePage createState() => _HomePage();
 }
 
-class _homePage extends State<HomePage> {
+class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

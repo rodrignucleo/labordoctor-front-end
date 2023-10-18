@@ -7,7 +7,7 @@ part of 'medico.dart';
 // **************************************************************************
 
 MedicoModel _$MedicoModelFromJson(Map<String, dynamic> json) => MedicoModel(
-      id_medico: json['id_medico'] as int?,
+      id_medico: json['id_medico'] as int,
       nome: json['nome'] as String,
       crm: json['crm'] as String,
       cpf: json['cpf'] as String,

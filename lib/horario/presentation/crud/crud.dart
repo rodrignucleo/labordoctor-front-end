@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/medico/data/datasource/api/get.dart';
 import 'package:myapp/medico/data/model/medico.dart';
+import 'package:myapp/shared/widgets/error_carregamento_dados.dart';
 
 import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
@@ -22,11 +23,11 @@ class HorarioForm extends StatefulWidget {
 
 class HorarioFormState extends State<HorarioForm> {
   final _formKey = GlobalKey<FormState>();
-
-  late MedicoModel _medico;
   final TextEditingController _dataController = TextEditingController();
+  late MedicoModel _medico;
 
   List<MedicoModel> _medicosCadastrados = [];
+  // ignore: prefer_final_fields
   List<MedicoModel> _medicoSelecionado = [];
 
   @override
@@ -51,6 +52,15 @@ class HorarioFormState extends State<HorarioForm> {
     });
   }
 
+  // nesta funcao estamos tentando simplificar a apresentação
+  // das opções de horario, paciente e médico, passando o valor
+  // selecionado por callback para a funcao principal
+  void _recebeMedicoSelecionado(dynamic item) {
+    setState(() {
+      _medico = item;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,17 +79,8 @@ class HorarioFormState extends State<HorarioForm> {
                   SizedBox(
                     height: 200,
                     child: _medicosCadastrados.isEmpty
-                        ? const Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Nenhum médico ainda adicionado',
-                                ),
-                              ],
-                            ),
-                          )
+                        ? const ErrorLoadData(
+                            mensagem: 'Nenhum médico cadastrado')
                         : ListView.builder(
                             shrinkWrap: true,
                             itemCount: _medicosCadastrados.length,
@@ -117,7 +118,6 @@ class HorarioFormState extends State<HorarioForm> {
                                         } else {
                                           _medicoSelecionado.add(medico);
                                           _medico = medico;
-                                          print('medico: $medico');
                                         }
                                       });
                                     },
@@ -138,9 +138,6 @@ class HorarioFormState extends State<HorarioForm> {
                     thickness: 1.0,
                   ),
                   BotaoGravar(
-                    onPressedNovo: () {
-                      _dataController.clear();
-                    },
                     onPressed: () async {
                       FocusScope.of(context).unfocus();
 
@@ -148,19 +145,20 @@ class HorarioFormState extends State<HorarioForm> {
                         final HorarioModel horario = HorarioModel(
                           // data: DateTime.parse(_dataController.text),
                           // estamos com problema aqui
+                          id_horario: 0,
                           data: DateTime.now(),
                           medico: _medico,
-                          medicoId: _medico.id_medico as int,
+                          id_medico: _medico.id_medico,
                           status: true,
                         );
 
                         if (widget.horarioModel == null ||
-                            widget.horarioModel!.horarioId == null) {
+                            widget.horarioModel!.id_horario == 0) {
                           await HorarioInsertDataSource()
                               .createHorario(horario: horario);
                         } else {
                           // mas se ele ja existir, tem que fazer o update dos dados
-                          horario.horarioId = widget.horarioModel!.horarioId;
+                          horario.id_horario = widget.horarioModel!.id_horario;
                           await HorarioUpdateDataSource()
                               .updateHorario(horario: horario);
                         }
@@ -171,6 +169,9 @@ class HorarioFormState extends State<HorarioForm> {
                         content: Text('Horario adicionado'),
                         duration: Duration(seconds: 2),
                       ));
+                    },
+                    limpaCamposDeDados: () {
+                      _dataController.clear();
                     },
                   ),
                 ],

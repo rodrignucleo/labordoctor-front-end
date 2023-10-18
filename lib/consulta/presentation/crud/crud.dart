@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/horario/data/datasource/api/get.dart';
-import 'package:myapp/horario/data/model/horario.dart';
-import 'package:myapp/medico/data/datasource/api/get.dart';
-import 'package:myapp/medico/data/model/medico.dart';
-import 'package:myapp/paciente/data/datasource/api/get.dart';
-import 'package:myapp/paciente/data/model/paciente.dart';
-
+import 'package:myapp/consulta/presentation/crud/widgets/select_list_itens.dart';
+import '../../../horario/data/datasource/api/get.dart';
+import '../../../horario/data/model/horario.dart';
+import '../../../medico/data/datasource/api/get.dart';
+import '../../../medico/data/model/medico.dart';
+import '../../../paciente/data/datasource/api/get.dart';
+import '../../../paciente/data/model/paciente.dart';
+import '../../../shared/widgets/error_carregamento_dados.dart';
 import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
 import '../../data/model/consulta.dart';
@@ -35,6 +36,10 @@ class ConsultaFormState extends State<ConsultaForm> {
   List<PacienteModel> _pacientesCadastrados = [];
   List<HorarioModel> _horariosCadastrados = [];
 
+  List<MedicoModel> _medicoSelecionado = [];
+  List<PacienteModel> _pacienteSelecionado = [];
+  List<HorarioModel> _horarioSelecionado = [];
+
   @override
   void initState() {
     if (widget.consultaModel != null) {
@@ -48,6 +53,15 @@ class ConsultaFormState extends State<ConsultaForm> {
     _resgataHorarioDisponivel();
 
     super.initState();
+  }
+
+  // nesta funcao estamos tentando simplificar a apresentação
+  // das opções de horario, paciente e médico, passando o valor
+  // selecionado por callback para a funcao principal
+  void recebeMedicoSelecionado(MedicoModel item) {
+    setState(() {
+      _medico = item;
+    });
   }
 
   Future<void> _resgataMedicoDisponivel() async {
@@ -96,17 +110,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _medicosCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum médico ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum medico.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _medicosCadastrados.length,
@@ -115,7 +121,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _medicosCadastrados[index];
 
                                 final bool isSelected =
-                                    _medicosCadastrados.contains(medico);
+                                    _medicoSelecionado.contains(medico);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -140,6 +146,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _medicoSelecionado.remove(medico);
+                                          } else {
+                                            _medicoSelecionado.add(medico);
                                             _medico = medico;
                                           }
                                         });
@@ -158,17 +167,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _pacientesCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum médico ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum paciente.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _pacientesCadastrados.length,
@@ -177,7 +178,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _pacientesCadastrados[index];
 
                                 final bool isSelected =
-                                    _pacientesCadastrados.contains(paciente);
+                                    _pacienteSelecionado.contains(paciente);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -202,6 +203,10 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _pacienteSelecionado
+                                                .remove(paciente);
+                                          } else {
+                                            _pacienteSelecionado.add(paciente);
                                             _paciente = paciente;
                                           }
                                         });
@@ -220,17 +225,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _horariosCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum horário ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum horario.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _horariosCadastrados.length,
@@ -239,7 +236,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _horariosCadastrados[index];
 
                                 final bool isSelected =
-                                    _horariosCadastrados.contains(horario);
+                                    _horarioSelecionado.contains(horario);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -264,6 +261,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _horarioSelecionado.remove(horario);
+                                          } else {
+                                            _horarioSelecionado.add(horario);
                                             _horario = horario;
                                           }
                                         });
@@ -283,31 +283,29 @@ class ConsultaFormState extends State<ConsultaForm> {
                       thickness: 1.0,
                     ),
                     BotaoGravar(
-                      onPressedNovo: () {
-                        _dataController.clear();
-                      },
                       onPressed: () async {
                         FocusScope.of(context).unfocus();
 
                         if (_formKey.currentState!.validate()) {
                           final ConsultaModel consulta = ConsultaModel(
+                            id_consulta: 0,
                             medico: _medico,
-                            medicoId: _medico.id_medico as int,
+                            id_medico: _medico.id_medico,
                             paciente: _paciente,
-                            pacienteId: _paciente.pacienteId as int,
+                            id_paciente: _paciente.id_paciente,
                             horario: _horario,
-                            horarioId: _horario.horarioId as int,
+                            id_horario: _horario.id_horario,
                             status: true,
                           );
 
                           if (widget.consultaModel == null ||
-                              widget.consultaModel!.consultaId == null) {
+                              widget.consultaModel!.id_consulta == 0) {
                             await ConsultaInsertDataSource()
                                 .createConsulta(consulta: consulta);
                           } else {
                             // mas se ele ja existir, tem que fazer o update dos dados
-                            consulta.consultaId =
-                                widget.consultaModel!.consultaId;
+                            consulta.id_consulta =
+                                widget.consultaModel!.id_consulta;
                             await ConsultaUpdateDataSource()
                                 .updateConsulta(consulta: consulta);
                           }
@@ -319,6 +317,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                           content: Text('Consulta adicionado'),
                           duration: Duration(seconds: 2),
                         ));
+                      },
+                      limpaCamposDeDados: () {
+                        _dataController.clear();
                       },
                     ),
                   ],
