@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/medico/data/model/medico.dart';
 
 // nesta classe estamos tentando simplificar a apresentação
 // das opções de horario, paciente e médico, passando o valor

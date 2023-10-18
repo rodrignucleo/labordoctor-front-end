@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/consulta/presentation/crud/widgets/select_list_itens.dart';
 import '../../../horario/data/datasource/api/get.dart';
 import '../../../horario/data/model/horario.dart';
 import '../../../medico/data/datasource/api/get.dart';
 import '../../../medico/data/model/medico.dart';
 import '../../../paciente/data/datasource/api/get.dart';
 import '../../../paciente/data/model/paciente.dart';
+import '../../../shared/widgets/error_carregamento_dados.dart';
 import '../../data/datasource/api/insert.dart';
 import '../../data/datasource/api/update.dart';
 import '../../data/model/consulta.dart';
 import 'widgets/botao_gravar.dart';
-import 'widgets/select_list_itens.dart';
 
 class ConsultaForm extends StatefulWidget {
   final ConsultaModel? consultaModel;
@@ -35,6 +36,10 @@ class ConsultaFormState extends State<ConsultaForm> {
   List<PacienteModel> _pacientesCadastrados = [];
   List<HorarioModel> _horariosCadastrados = [];
 
+  List<MedicoModel> _medicoSelecionado = [];
+  List<PacienteModel> _pacienteSelecionado = [];
+  List<HorarioModel> _horarioSelecionado = [];
+
   @override
   void initState() {
     if (widget.consultaModel != null) {
@@ -53,7 +58,7 @@ class ConsultaFormState extends State<ConsultaForm> {
   // nesta funcao estamos tentando simplificar a apresentação
   // das opções de horario, paciente e médico, passando o valor
   // selecionado por callback para a funcao principal
-  void _recebeMedicoSelecionado(dynamic item) {
+  void recebeMedicoSelecionado(MedicoModel item) {
     setState(() {
       _medico = item;
     });
@@ -105,17 +110,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _medicosCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum médico ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum medico.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _medicosCadastrados.length,
@@ -124,7 +121,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _medicosCadastrados[index];
 
                                 final bool isSelected =
-                                    _medicosCadastrados.contains(medico);
+                                    _medicoSelecionado.contains(medico);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -149,6 +146,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _medicoSelecionado.remove(medico);
+                                          } else {
+                                            _medicoSelecionado.add(medico);
                                             _medico = medico;
                                           }
                                         });
@@ -167,17 +167,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _pacientesCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum médico ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum paciente.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _pacientesCadastrados.length,
@@ -186,7 +178,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _pacientesCadastrados[index];
 
                                 final bool isSelected =
-                                    _pacientesCadastrados.contains(paciente);
+                                    _pacienteSelecionado.contains(paciente);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -211,6 +203,10 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _pacienteSelecionado
+                                                .remove(paciente);
+                                          } else {
+                                            _pacienteSelecionado.add(paciente);
                                             _paciente = paciente;
                                           }
                                         });
@@ -229,17 +225,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                     SizedBox(
                       height: 200,
                       child: _horariosCadastrados.isEmpty
-                          ? const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Nenhum horário ainda adicionado',
-                                  ),
-                                ],
-                              ),
-                            )
+                          ? const ErrorLoadData(
+                              mensagem:
+                                  'Ainda não foi registrado nenhum horario.')
                           : ListView.builder(
                               shrinkWrap: true,
                               itemCount: _horariosCadastrados.length,
@@ -248,7 +236,7 @@ class ConsultaFormState extends State<ConsultaForm> {
                                     _horariosCadastrados[index];
 
                                 final bool isSelected =
-                                    _horariosCadastrados.contains(horario);
+                                    _horarioSelecionado.contains(horario);
 
                                 return Padding(
                                   padding: const EdgeInsets.all(3.0),
@@ -273,6 +261,9 @@ class ConsultaFormState extends State<ConsultaForm> {
                                       onTap: () {
                                         setState(() {
                                           if (isSelected) {
+                                            _horarioSelecionado.remove(horario);
+                                          } else {
+                                            _horarioSelecionado.add(horario);
                                             _horario = horario;
                                           }
                                         });

@@ -23,9 +23,8 @@ class HorarioForm extends StatefulWidget {
 
 class HorarioFormState extends State<HorarioForm> {
   final _formKey = GlobalKey<FormState>();
-
-  late MedicoModel _medico;
   final TextEditingController _dataController = TextEditingController();
+  late MedicoModel _medico;
 
   List<MedicoModel> _medicosCadastrados = [];
   // ignore: prefer_final_fields
@@ -80,7 +79,8 @@ class HorarioFormState extends State<HorarioForm> {
                   SizedBox(
                     height: 200,
                     child: _medicosCadastrados.isEmpty
-                        ? const ErrorLoadData(mensagem: 'Nenhum médico cadastrado')
+                        ? const ErrorLoadData(
+                            mensagem: 'Nenhum médico cadastrado')
                         : ListView.builder(
                             shrinkWrap: true,
                             itemCount: _medicosCadastrados.length,
